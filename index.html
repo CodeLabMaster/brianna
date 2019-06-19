@@ -1,0 +1,80 @@
+<html>
+
+  <head>
+    <script type="text/javascript">
+      gameTimer = null;
+      correctAnswers = 0;
+
+      function check(ele, answer) {
+        if (ele.value == answer) {
+          ele.style.backgroundColor = '#5F5';
+          correctAnswers += 1
+          if (correctAnswers == 4) {
+            document.getElementById('result').innerHTML = "You Win!"
+            clearTimeout(gameTimer);
+          }
+        } else if (ele.value != "") {
+          ele.style.backgroundColor = '#F55';
+          document.getElementById('result').innerHTML = 'Incorrect, game over!!!';
+          clearTimeout(gameTimer);
+        }
+      }
+
+      function game_start() {
+        document.getElementById('math').style.display = 'block';
+        gameTimer = setTimeout(game_over, 60 * 1000);
+      }
+
+      function game_over() {
+        document.getElementById('result').innerHTML = "You ran out of time, try again!";
+      }
+
+    </script>
+    <style>
+      table {
+        display: none;
+      }
+
+      input {
+        width: 50px;
+      }
+
+    </style>
+  </head>
+
+  <body>
+    <h2>
+      Calculate the value of the following expressions:
+    </h2>
+    <p>
+      You have one minute to answer the following questions. If you take too long or get one wrong, then the game is over. Good luck!
+    </p>
+    <input type='button' value='Start!' onclick='game_start()' />
+    <table id="math" border>
+      <tr>
+        <td>1.</td>
+        <td>(12*7)+48/4</td>
+        <td><input type='text' onblur='check(this, 96)' id='a1'></td>
+      </tr>
+      <tr>
+        <td>2.</td>
+        <td>(11*4)*2</td>
+        <td><input type='text' onblur='check(this, 88)' id='a2'></td>
+      </tr>
+      <tr>
+        <td>3.</td>
+        <td>(8*6)/(3*2)</td>
+        <td><input type='text' onblur='check(this, 8)' id='a3'></td>
+      </tr>
+      <tr>
+        <td>4.</td>
+        <td>(7*4)*3</td>
+        <td><input type='text' onblur='check(this, 84)' id='a4'></td>
+      </tr>
+      <tr>
+        <td colspan='3' id='result'></td>
+      </tr>
+    </table>
+  </body>
+
+</html>
